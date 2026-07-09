@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pasalo-cars-ph.github.io/pasalo-cars-ph/sitemap.xml
