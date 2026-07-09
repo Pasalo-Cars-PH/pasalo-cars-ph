@@ -70,4 +70,14 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://pasalo-cars-ph.github.io/pasalo-cars-ph/nissan-patrol-details.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://pasalo-cars-ph.github.io/pasalo-cars-ph/landcruiser-300zx-details.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
