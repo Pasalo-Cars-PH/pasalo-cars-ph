@@ -1,0 +1,58 @@
+<!-- UNITS section - UPDATED with Search & Filters -->
+  <section class="section units" id="units">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow-dark">BROWSE</span>
+        <h2>Available Units</h2>
+        <p>Search, filter, at mahanap ang perpektong car para sa iyo.</p>
+      </div>
+
+      <!-- SEARCH & FILTER BAR -->
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search by brand, model, or features...">
+        <select id="brandFilter">
+          <option value="">All Brands</option>
+          <option value="Toyota">Toyota</option>
+          <option value="Honda">Honda</option>
+          <option value="Ford">Ford</option>
+          <option value="Mitsubishi">Mitsubishi</option>
+          <option value="Nissan">Nissan</option>
+          <option value="Mazda">Mazda</option>
+          <option value="Chery">Chery</option>
+          <option value="Suzuki">Suzuki</option>
+          <option value="BAIC">BAIC</option>
+          <option value="MG">MG</option>
+        </select>
+        <select id="typeFilter">
+          <option value="">All Types</option>
+          <option value="SUV">SUV</option>
+          <option value="Sedan">Sedan</option>
+          <option value="MPV">MPV</option>
+          <option value="Pickup">Pickup</option>
+          <option value="Hatchback">Hatchback</option>
+          <option value="Sports">Sports</option>
+          <option value="Electric">Electric</option>
+          <option value="Full-Size SUV">Full-Size SUV</option>
+          <option value="Plug-in Hybrid">Plug-in Hybrid</option>
+          <option value="Hybrid SUV">Hybrid SUV</option>
+        </select>
+        <select id="categoryFilter">
+          <option value="">All Units</option>
+          <option value="pasalo">Pasalo</option>
+          <option value="new">New</option>
+        </select>
+        <button id="resetFilters" class="btn btn-dark" style="font-size:13px; padding:12px 20px;">Reset Filters</button>
+      </div>
+
+      <div style="text-align:center; margin-bottom:24px;">
+        <span id="resultCount" style="color:#5B5E63; font-size:14px; font-weight:600;">Loading vehicles...</span>
+      </div>
+
+      <!-- VEHICLE GRID (dynamically populated) -->
+      <div class="units-grid" id="vehiclesContainer">
+        <div style="text-align:center; grid-column:1/-1; color:#8A8D92;">Loading vehicles...</div>
+      </div>
+
+      <p class="units-footnote">Lahat ng vehicles ay verified ang dokumento at balanse. Kontakin kami para sa mas detalyadong impormasyon.</p>
+    </div>
+  </section>
