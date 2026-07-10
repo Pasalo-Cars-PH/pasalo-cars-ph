@@ -81,6 +81,26 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://pasalo-cars-ph.github.io/pasalo-cars-ph/civic-rs-turbo-details.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://pasalo-cars-ph.github.io/pasalo-cars-ph/mg4-ev-details.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://pasalo-cars-ph.github.io/pasalo-cars-ph/ertiga-hybrid-details.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://pasalo-cars-ph.github.io/pasalo-cars-ph/avanza-e-details.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://pasalo-cars-ph.github.io/pasalo-cars-ph/sell-your-car.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
