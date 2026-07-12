@@ -11,6 +11,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://pasalo-cars-ph.github.io/pasalo-cars-ph/avanza-13e-details.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://pasalo-cars-ph.github.io/pasalo-cars-ph/avanza-e-details.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -61,6 +66,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://pasalo-cars-ph.github.io/pasalo-cars-ph/jetour-x70-idm-details.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://pasalo-cars-ph.github.io/pasalo-cars-ph/landcruiser-300zx-details.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -92,6 +102,11 @@
   </url>
   <url>
     <loc>https://pasalo-cars-ph.github.io/pasalo-cars-ph/ranger-raptor-details.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasalo-cars-ph.github.io/pasalo-cars-ph/terra-ve-details.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
