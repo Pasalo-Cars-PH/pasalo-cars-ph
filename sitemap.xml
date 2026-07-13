@@ -56,6 +56,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://pasalo-cars-ph.github.io/pasalo-cars-ph/fortuner-v-2023-details.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://pasalo-cars-ph.github.io/pasalo-cars-ph/hilux-grs-details.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -81,7 +86,17 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://pasalo-cars-ph.github.io/pasalo-cars-ph/mg5-core-details.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://pasalo-cars-ph.github.io/pasalo-cars-ph/montero-sport-details.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasalo-cars-ph.github.io/pasalo-cars-ph/montero-sport-glx-details.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -107,6 +122,11 @@
   </url>
   <url>
     <loc>https://pasalo-cars-ph.github.io/pasalo-cars-ph/tiggo-rev-details.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasalo-cars-ph.github.io/pasalo-cars-ph/tiggo7-hev-details.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
