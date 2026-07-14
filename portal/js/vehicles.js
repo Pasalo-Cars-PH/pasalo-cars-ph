@@ -18,6 +18,28 @@ function displayVehicles(data){
 
 container.innerHTML += `
 <div class="card">
+
+    <img src="${vehicle.image}"
+         alt="${vehicle.brand} ${vehicle.model}"
+         class="vehicle-img">
+
+    <h3>🚗 ${vehicle.brand} ${vehicle.model}</h3>
+
+    <p>📅 Year: ${vehicle.year}</p>
+
+    <p>💳 Monthly: ₱${vehicle.monthly.toLocaleString()}</p>
+
+    <p>✅ Status: ${vehicle.status}</p>
+
+    <a href="${vehicle.details}">
+        <button class="view-btn">
+            View Details
+        </button>
+    </a>
+
+</div>
+`;
+<div class="card">
     <h3>🚗 ${vehicle.brand} ${vehicle.model}</h3>
 
     <p>📅 Year: ${vehicle.year}</p>
