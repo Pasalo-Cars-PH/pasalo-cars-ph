@@ -91,6 +91,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://pasalo-cars-ph.github.io/pasalo-cars-ph/lambo-huracan-spyder-details.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://pasalo-cars-ph.github.io/pasalo-cars-ph/landcruiser-300zx-details.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
