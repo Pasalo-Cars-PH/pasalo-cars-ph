@@ -1,18 +1,20 @@
 [
   {
-    "id": 1,
     "brand": "Toyota",
     "model": "Fortuner G",
     "year": 2026,
     "monthly": 38767,
-    "status": "Available"
+    "status": "Available",
+    "image": "../fortuner-g.jpeg",
+    "details": "../fortuner-g-details.html"
   },
   {
-    "id": 2,
     "brand": "BYD",
     "model": "Sealion 6 DM-i",
     "year": 2026,
     "monthly": 29998,
-    "status": "Available"
+    "status": "Available",
+    "image": "../byd-sealion-6.jpeg",
+    "details": "../byd-sealion-6-details.html"
   }
 ]
