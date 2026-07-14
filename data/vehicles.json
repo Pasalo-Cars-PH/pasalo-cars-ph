@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "brand": "Toyota",
+    "model": "Fortuner G",
+    "year": 2026,
+    "monthly": 38767,
+    "status": "Available"
+  },
+  {
+    "id": 2,
+    "brand": "BYD",
+    "model": "Sealion 6 DM-i",
+    "year": 2026,
+    "monthly": 29998,
+    "status": "Available"
+  }
+]
