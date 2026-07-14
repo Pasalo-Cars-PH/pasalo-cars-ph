@@ -16,14 +16,21 @@ function displayVehicles(data){
 
     data.forEach(vehicle => {
 
-        container.innerHTML += `
-        <div class="card">
-            <h3>${vehicle.brand} ${vehicle.model}</h3>
-            <p>Year: ${vehicle.year}</p>
-            <p>Monthly: ₱${vehicle.monthly.toLocaleString()}</p>
-            <p>Status: ${vehicle.status}</p>
-        </div>
-        `;
+container.innerHTML += `
+<div class="card">
+    <h3>🚗 ${vehicle.brand} ${vehicle.model}</h3>
+
+    <p>📅 Year: ${vehicle.year}</p>
+
+    <p>💳 Monthly: ₱${vehicle.monthly.toLocaleString()}</p>
+
+    <p>✅ Status: ${vehicle.status}</p>
+
+    <button class="view-btn">
+        View Details
+    </button>
+</div>
+`;
     });
 }
 
