@@ -126,6 +126,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://pasalo-cars-ph.github.io/pasalo-cars-ph/mustang-mach-e-details.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://pasalo-cars-ph.github.io/pasalo-cars-ph/nissan-patrol-details.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -152,6 +157,11 @@
   </url>
   <url>
     <loc>https://pasalo-cars-ph.github.io/pasalo-cars-ph/triton-glx-details.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasalo-cars-ph.github.io/pasalo-cars-ph/vios-xle-2026-details.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
