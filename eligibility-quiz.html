@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="tl">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GCSWRCWCE7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-GCSWRCWCE7');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alamin ang Perfect na Unit Para Sa'yo | Pasalo Cars PH</title>
+<meta name="description" content="Sagutan ang 30-segundong quiz at malaman kung anong assume balance unit ang bagay sa budget at pangangailangan mo. Libre, walang commitment.">
+<link rel="canonical" href="https://pasalo-cars-ph.github.io/pasalo-cars-ph/eligibility-quiz.html">
+<meta name="robots" content="noindex, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Permanent+Marker&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --asphalt:#1B1D21; --asphalt-2:#25282E; --asphalt-3:#33373E;
+    --paper:#F3EFE6; --paper-2:#EAE4D6; --ink:#1B1D21;
+    --signal:#FFC933; --plate-blue:#25476E; --white:#FFFFFF; --line:rgba(255,255,255,0.12);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Work Sans',sans-serif; background:var(--asphalt); color:var(--paper); line-height:1.5; min-height:100vh;}
+  h1,h2,h3,.display{font-family:'Anton',sans-serif; font-weight:400; text-transform:uppercase; letter-spacing:0.5px; line-height:1.1;}
+  a{color:inherit; text-decoration:none;}
+  img{display:block; max-width:100%;}
+  .wrap{max-width:560px; margin:0 auto; padding:0 20px;}
+
+  .top-bar{padding:18px 0; text-align:center; border-bottom:1px solid var(--line);}
+  .top-bar .brand{font-family:'Anton',sans-serif; font-size:17px; color:var(--white);}
+  .top-bar .brand span{color:var(--signal);}
+
+  .quiz-wrap{padding:36px 0 60px;}
+
+  .progress-track{height:6px; background:var(--asphalt-3); border-radius:100px; overflow:hidden; margin-bottom:28px;}
+  .progress-fill{height:100%; background:var(--signal); border-radius:100px; transition:width 0.35s ease; width:25%;}
+  .step-label{font-size:12px; color:#9CA0A6; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:10px;}
+
+  .step{display:none;}
+  .step.active{display:block; animation:fadeIn 0.35s ease;}
+  @keyframes fadeIn{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);}}
+
+  .step h2{font-size:24px; color:var(--white); margin-bottom:8px;}
+  .step .sub{font-size:14px; color:#C9CCD1; margin-bottom:26px;}
+
+  .option-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:24px;}
+  .option-btn{
+    background:var(--asphalt-2); border:1.5px solid var(--line); border-radius:12px;
+    padding:20px 14px; text-align:center; cursor:pointer; color:var(--paper);
+    font-size:14.5px; font-weight:700; transition:border-color 0.15s ease, background 0.15s ease;
+  }
+  .option-btn .emoji{display:block; font-size:26px; margin-bottom:8px;}
+  .option-btn:hover{border-color:rgba(255,201,51,0.5);}
+  .option-btn.selected{border-color:var(--signal); background:rgba(255,201,51,0.12); color:var(--signal);}
+
+  .form-field{margin-bottom:16px;}
+  .form-field label{display:block; font-size:13px; font-weight:700; color:#C9CCD1; margin-bottom:6px;}
+  .form-field input{
+    width:100%; font-family:'Work Sans',sans-serif; font-size:15px; padding:14px 16px;
+    border:1.5px solid var(--line); border-radius:8px; background:var(--asphalt-2); color:var(--white);
+  }
+  .form-field input::placeholder{color:#6B6E73;}
+  .form-field input:focus{outline:none; border-color:var(--signal);}
+
+  .nav-row{display:flex; gap:12px; margin-top:8px;}
+  .btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; font-weight:700; font-size:15px; padding:15px 24px; border-radius:8px; border:none; cursor:pointer; flex:1;}
+  .btn-primary{background:var(--signal); color:var(--asphalt);}
+  .btn-primary:disabled{opacity:0.4; cursor:not-allowed;}
+  .btn-back{background:transparent; color:#9CA0A6; border:1.5px solid var(--line); flex:0 0 auto; padding:15px 20px;}
+
+  .trust-note{display:flex; align-items:center; gap:8px; font-size:12.5px; color:#8A8D92; margin-top:20px; justify-content:center;}
+
+  /* RESULTS */
+  .results-head{text-align:center; margin-bottom:24px;}
+  .results-head .checkmark{font-size:38px; margin-bottom:10px;}
+  .results-head h2{font-size:22px; color:var(--white);}
+  .results-head p{font-size:14px; color:#C9CCD1; margin-top:6px;}
+
+  .result-card{
+    display:flex; gap:14px; background:var(--asphalt-2); border:1px solid var(--line); border-radius:12px;
+    padding:14px; margin-bottom:12px; align-items:center;
+  }
+  .result-card img{width:88px; height:66px; object-fit:cover; border-radius:8px; flex-shrink:0;}
+  .result-card .info{flex:1; min-width:0;}
+  .result-card h3{font-family:'Work Sans',sans-serif; text-transform:none; font-size:14px; font-weight:700; color:var(--white); letter-spacing:0; margin-bottom:3px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .result-card .price{font-family:'Anton',sans-serif; font-size:16px; color:var(--signal);}
+  .result-card .badge{font-size:10.5px; font-weight:700; color:#9CA0A6; background:var(--asphalt-3); padding:2px 8px; border-radius:100px; display:inline-block; margin-top:4px;}
+
+  .no-match{text-align:center; padding:24px; background:var(--asphalt-2); border-radius:12px; margin-bottom:20px; font-size:14px; color:#C9CCD1;}
+
+  .final-cta{text-align:center; margin-top:24px;}
+  .final-cta p{font-size:13px; color:#8A8D92; margin-top:14px;}
+
+  @media (max-width:420px){
+    .step h2{font-size:20px;}
+  }
+</style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <a href="index.html" class="brand">PASALO <span>CARS</span> PH</a>
+  </div>
+
+  <div class="quiz-wrap">
+    <div class="wrap">
+
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+      <!-- STEP 1: BUDGET -->
+      <div class="step active" data-step="1">
+        <div class="step-label">Hakbang 1 ng 3</div>
+        <h2>Magkano ang Budget Mo Bawat Buwan?</h2>
+        <p class="sub">Pipiliin namin ang mga units na bagay sa iyong budget.</p>
+        <div class="option-grid" id="budgetOptions">
+          <div class="option-btn" data-value="under-30k"><span class="emoji">💰</span>Under ₱30K</div>
+          <div class="option-btn" data-value="30-40k"><span class="emoji">💵</span>₱30K – 40K</div>
+          <div class="option-btn" data-value="40k-plus"><span class="emoji">💎</span>₱40K+</div>
+          <div class="option-btn" data-value="any"><span class="emoji">🤷</span>Kahit Magkano</div>
+        </div>
+        <div class="nav-row">
+          <button class="btn btn-primary" id="toStep2" disabled>Susunod →</button>
+        </div>
+      </div>
+
+      <!-- STEP 2: TYPE -->
+      <div class="step" data-step="2">
+        <div class="step-label">Hakbang 2 ng 3</div>
+        <h2>Anong Klaseng Sasakyan?</h2>
+        <p class="sub">Piliin ang body type na pinaka-kailangan mo.</p>
+        <div class="option-grid" id="typeOptions">
+          <div class="option-btn" data-value="SUV"><span class="emoji">🚙</span>SUV</div>
+          <div class="option-btn" data-value="Sedan"><span class="emoji">🚗</span>Sedan</div>
+          <div class="option-btn" data-value="Pickup"><span class="emoji">🛻</span>Pickup</div>
+          <div class="option-btn" data-value="MPV"><span class="emoji">👨‍👩‍👧‍👦</span>MPV / Family</div>
+          <div class="option-btn" data-value="Hatchback"><span class="emoji">🚘</span>Hatchback</div>
+          <div class="option-btn" data-value="any"><span class="emoji">🤷</span>Kahit Ano</div>
+        </div>
+        <div class="nav-row">
+          <button class="btn btn-back" id="backTo1">← Balik</button>
+          <button class="btn btn-primary" id="toStep3" disabled>Susunod →</button>
+        </div>
+      </div>
+
+      <!-- STEP 3: CONTACT -->
+      <div class="step" data-step="3">
+        <div class="step-label">Hakbang 3 ng 3</div>
+        <h2>Saan Namin Ipapadala ang Resulta?</h2>
+        <p class="sub">Ilagay ang pangalan at numero mo para makita ang mga bagay-bagay na units.</p>
+        <div class="form-field">
+          <label for="quizName">Pangalan</label>
+          <input type="text" id="quizName" placeholder="Juan Dela Cruz">
+        </div>
+        <div class="form-field">
+          <label for="quizPhone">Numero ng Telepono</label>
+          <input type="tel" id="quizPhone" placeholder="09XX XXX XXXX">
+        </div>
+        <div class="nav-row">
+          <button class="btn btn-back" id="backTo2">← Balik</button>
+          <button class="btn btn-primary" id="toResults" disabled>Makita ang Resulta →</button>
+        </div>
+        <div class="trust-note">🔒 Hindi namin ibabahagi ang detalye mo sa iba.</div>
+      </div>
+
+      <!-- STEP 4: RESULTS -->
+      <div class="step" data-step="4">
+        <div class="results-head">
+          <div class="checkmark">✅</div>
+          <h2 id="resultsHeading">Heto ang Bagay Para Sa'yo</h2>
+          <p id="resultsSub"></p>
+        </div>
+        <div id="resultsList"></div>
+        <div class="final-cta">
+          <a href="#" id="whatsappResultBtn" class="btn btn-primary" target="_blank" rel="noopener" style="width:100%;">📲 I-message para sa Detalye</a>
+          <p>Sasagutin namin ang mensahe mo sa loob ng ilang minuto.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+<script>
+  const UNITS = [
+    {slug:"ranger-raptor", brand:"Ford", monthly:"40k-plus", type:"Pickup", img:"ranger-raptor.jpeg", title:"2026 Ford Ranger Raptor 4x4 A/T", price:"₱54K+"},
+    {slug:"baic-b60", brand:"BAIC", monthly:"40k-plus", type:"SUV", img:"baic-b60.jpeg", title:"2025 BAIC B60 TDi Hybrid", price:"₱45,357"},
+    {slug:"fortuner-g", brand:"Toyota", monthly:"30-40k", type:"SUV", img:"fortuner-g.jpeg", title:"2026 Toyota Fortuner G A/T", price:"₱38,767"},
+    {slug:"civic-v", brand:"Honda", monthly:"30-40k", type:"Sedan", img:"civic-v.jpeg", title:"2025 Honda Civic V CVT A/T", price:"₱33,800"},
+    {slug:"hilux-grs", brand:"Toyota", monthly:"40k-plus", type:"Pickup", img:"hilux-grs.jpeg", title:"2025 Toyota Hilux GR-S 4x4 A/T", price:"₱43,232"},
+    {slug:"xpander-cross", brand:"Mitsubishi", monthly:"under-30k", type:"MPV", img:"xpander-cross.jpeg", title:"Mitsubishi Xpander Cross A/T", price:"₱28,878"},
+    {slug:"wigo-g", brand:"Toyota", monthly:"under-30k", type:"Hatchback", img:"wigo-g.jpeg", title:"2026 Toyota Wigo G CVT", price:"₱15,300"},
+    {slug:"yaris-cross", brand:"Toyota", monthly:"under-30k", type:"Crossover", img:"yaris-cross.jpeg", title:"2026 Toyota Yaris Cross Hybrid", price:"₱29,789"},
+    {slug:"zenix-q", brand:"Toyota", monthly:"40k-plus", type:"MPV", img:"zenix-q.jpeg", title:"2026 Toyota Innova Zenix Q HEV", price:"₱43,243"},
+    {slug:"everest-titanium", brand:"Ford", monthly:"40k-plus", type:"SUV", img:"everest-titanium-2026.jpeg", title:"2026 Ford Everest Titanium 4x2", price:"₱47K+"},
+    {slug:"montero-sport", brand:"Mitsubishi", monthly:"30-40k", type:"SUV", img:"montero-sport-gls.jpeg", title:"2026 Montero Sport GLS", price:"₱39,891"},
+    {slug:"nissan-patrol", brand:"Nissan", monthly:"40k-plus", type:"SUV", img:"nissan-patrol.jpeg", title:"2026 Nissan Patrol V6 Twin Turbo 4x4 A/T", price:"₱111,099"},
+    {slug:"landcruiser-300zx", brand:"Toyota", monthly:"40k-plus", type:"SUV", img:"landcruiser-300zx.jpeg", title:"2026 Toyota Land Cruiser 300 ZX", price:"₱122,000"},
+    {slug:"civic-rs-turbo", brand:"Honda", monthly:"30-40k", type:"Sedan", img:"civic-rs-turbo-2026.jpeg", title:"2026 Honda Civic RS Turbo", price:"₱37,885"},
+    {slug:"mg4-ev", brand:"MG", monthly:"under-30k", type:"Hatchback", img:"mg4-ev.jpeg", title:"2026 MG 4 AT Electric Vehicle", price:"₱27,619"},
+    {slug:"ertiga-hybrid", brand:"Suzuki", monthly:"under-30k", type:"MPV", img:"ertiga-hybrid.jpeg", title:"2026 Suzuki Ertiga Hybrid AT", price:"₱24,457"},
+    {slug:"avanza-e", brand:"Toyota", monthly:"under-30k", type:"MPV", img:"avanza-e.jpeg", title:"2026 Toyota Avanza E CVT", price:"₱22,476"},
+    {slug:"raize-g", brand:"Toyota", monthly:"under-30k", type:"Crossover", img:"raize-g.jpeg", title:"2026 Toyota Raize G A/T", price:"₱18,639"},
+    {slug:"hilux-tamaraw-fx", brand:"Toyota", monthly:"under-30k", type:"MPV", img:"hilux-tamaraw-fx.jpeg", title:"2026 Hilux Tamaraw FX DSL M/T", price:"₱26,883"},
+    {slug:"fortuner-g-4x2", brand:"Toyota", monthly:"30-40k", type:"SUV", img:"fortuner-g-4x2.jpeg", title:"2026 Toyota Fortuner G 4x2 A/T", price:"₱39,404"},
+    {slug:"jetour-x70-idm", brand:"Jetour", monthly:"30-40k", type:"SUV", img:"jetour-x70.jpeg", title:"2026 Jetour X70 i-DM A/T", price:"₱32,251"},
+    {slug:"avanza-13e", brand:"Toyota", monthly:"under-30k", type:"MPV", img:"avanza-13e.jpeg", title:"2026 Toyota Avanza 1.3 E CVT", price:"₱23,245"},
+    {slug:"fortuner-v-2023", brand:"Toyota", monthly:"30-40k", type:"SUV", img:"fortuner-v-2023.jpeg", title:"2023 Toyota Fortuner V A/T", price:"₱35,113"},
+    {slug:"mg5-core", brand:"MG", monthly:"under-30k", type:"Sedan", img:"mg5-core.jpeg", title:"MG 5 Core A/T", price:"₱15,309"},
+    {slug:"montero-sport-glx", brand:"Mitsubishi", monthly:"under-30k", type:"SUV", img:"montero-sport-glx.jpeg", title:"2025 Mitsubishi Montero Sport GLX M/T", price:"₱29,000"},
+    {slug:"geely-emgrand-comfort", brand:"Geely", monthly:"under-30k", type:"Sedan", img:"geely-emgrand-comfort.jpeg", title:"2022 Geely Emgrand Comfort A/T", price:"₱19,367"},
+    {slug:"triton-glx", brand:"Mitsubishi", monthly:"under-30k", type:"Pickup", img:"triton-glx.jpeg", title:"2026 Mitsubishi Triton GLX A/T", price:"₱29,000"},
+    {slug:"innova-xe", brand:"Toyota", monthly:"30-40k", type:"MPV", img:"innova-xe.jpeg", title:"2026 Toyota Innova XE Diesel A/T", price:"₱30,368"},
+    {slug:"avanza-13e-green", brand:"Toyota", monthly:"under-30k", type:"MPV", img:"avanza-13e-green.jpeg", title:"2026 Toyota Avanza 1.3 E CVT", price:"₱21,444"},
+    {slug:"wigo-g-2026", brand:"Toyota", monthly:"under-30k", type:"Hatchback", img:"wigo-g-2026.jpeg", title:"2026 Toyota Wigo G CVT", price:"₱15,513"},
+    {slug:"vios-xle-2026", brand:"Toyota", monthly:"under-30k", type:"Sedan", img:"vios-xle-2026.jpeg", title:"2026 Toyota Vios XLE CVT A/T", price:"₱17,966"},
+    {slug:"mustang-mach-e", brand:"Ford", monthly:"40k-plus", type:"SUV", img:"mustang-mach-e.jpeg", title:"2026 Ford Mustang Mach-E A/T", price:"₱54,287"}
+  ];
+
+  let answers = { budget: null, type: null, name: "", phone: "" };
+  let currentStep = 1;
+
+  function trackEvent(name, params){
+    if (typeof gtag === 'function') gtag('event', name, params || {});
+  }
+
+  function goToStep(n){
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.querySelector(`.step[data-step="${n}"]`).classList.add('active');
+    currentStep = n;
+    document.getElementById('progressFill').style.width = (n / 4 * 100) + '%';
+    trackEvent('quiz_step_view', { step: n });
+  }
+
+  function setupOptionGroup(containerId, answerKey, nextBtnId){
+    const container = document.getElementById(containerId);
+    const nextBtn = document.getElementById(nextBtnId);
+    container.querySelectorAll('.option-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        container.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        answers[answerKey] = btn.getAttribute('data-value');
+        nextBtn.disabled = false;
+      });
+    });
+  }
+
+  setupOptionGroup('budgetOptions', 'budget', 'toStep2');
+  setupOptionGroup('typeOptions', 'type', 'toStep3');
+
+  document.getElementById('toStep2').addEventListener('click', () => goToStep(2));
+  document.getElementById('backTo1').addEventListener('click', () => goToStep(1));
+  document.getElementById('toStep3').addEventListener('click', () => goToStep(3));
+  document.getElementById('backTo2').addEventListener('click', () => goToStep(2));
+
+  const nameInput = document.getElementById('quizName');
+  const phoneInput = document.getElementById('quizPhone');
+  const toResultsBtn = document.getElementById('toResults');
+  function checkContactValid(){
+    toResultsBtn.disabled = !(nameInput.value.trim().length > 1 && phoneInput.value.trim().length >= 7);
+  }
+  nameInput.addEventListener('input', checkContactValid);
+  phoneInput.addEventListener('input', checkContactValid);
+
+  document.getElementById('toResults').addEventListener('click', () => {
+    answers.name = nameInput.value.trim();
+    answers.phone = phoneInput.value.trim();
+    renderResults();
+    goToStep(4);
+    trackEvent('generate_lead', { method: 'eligibility_quiz', budget: answers.budget, vehicle_type: answers.type });
+  });
+
+  function renderResults(){
+    let matches = UNITS.filter(u => {
+      const budgetOk = answers.budget === 'any' || u.monthly === answers.budget;
+      const typeOk = answers.type === 'any' || u.type === answers.type;
+      return budgetOk && typeOk;
+    });
+
+    // Fallback: relax type filter if too few matches
+    if (matches.length < 3 && answers.type !== 'any') {
+      const budgetOnly = UNITS.filter(u => answers.budget === 'any' || u.monthly === answers.budget);
+      matches = [...matches, ...budgetOnly.filter(u => !matches.includes(u))].slice(0, 6);
+    }
+
+    matches = matches.slice(0, 4);
+
+    const listEl = document.getElementById('resultsList');
+    const headingEl = document.getElementById('resultsHeading');
+    const subEl = document.getElementById('resultsSub');
+
+    if (matches.length === 0) {
+      headingEl.textContent = `Salamat, ${answers.name || 'Kaibigan'}!`;
+      subEl.textContent = 'Wala kaming exact match ngayon, pero marami pa kaming ibang units.';
+      listEl.innerHTML = '<div class="no-match">I-message na lang kami directly — tutulungan ka naming maghanap ng bagay sa budget at pangangailangan mo.</div>';
+    } else {
+      headingEl.textContent = `Salamat, ${answers.name}!`;
+      subEl.textContent = `Heto ang ${matches.length} unit na pwedeng bagay sa'yo:`;
+      listEl.innerHTML = matches.map(u => `
+        <a href="${u.slug}-details.html" class="result-card" style="text-decoration:none;">
+          <img src="${u.img}" alt="${u.title}">
+          <div class="info">
+            <h3>${u.title}</h3>
+            <span class="price">${u.price}</span>
+            <span class="badge">${u.type}</span>
+          </div>
+        </a>
+      `).join('');
+    }
+
+    const budgetLabel = {"under-30k":"Under ₱30K","30-40k":"₱30K-40K","40k-plus":"₱40K+","any":"Kahit magkano"}[answers.budget] || answers.budget;
+    const typeLabel = answers.type === 'any' ? 'kahit anong klase' : answers.type;
+    let message = `Hi! Sinagutan ko yung quiz sa website niyo.\nPangalan: ${answers.name}\nNumero: ${answers.phone}\nBudget: ${budgetLabel}\nGustong Klase: ${typeLabel}`;
+    if (matches.length > 0) {
+      message += `\n\nInteresado ako sa: ${matches.map(u => u.title).join(', ')}`;
+    }
+    document.getElementById('whatsappResultBtn').href = `https://wa.me/639950369117?text=${encodeURIComponent(message)}`;
+  }
+</script>
+</body>
+</html>
