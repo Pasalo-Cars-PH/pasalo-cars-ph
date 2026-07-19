@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pasalo Cars PH — AI Assistant Widget</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --asphalt:#1B1F24;
+    --asphalt-2:#262B32;
+    --amber:#F5A623;
+    --amber-dark:#D98C0F;
+    --paper:#F3F3EF;
+    --paper-2:#E7E6DF;
+    --steel:#6B7280;
+    --highway-green:#2E7D5C;
+    --line:#DAD8CE;
+    --radius:16px;
+  }
+  *{box-sizing:border-box;}
+  html,body{height:100%;margin:0;}
+  body{
+    font-family:'Inter',sans-serif;
+    background:
+      radial-gradient(circle at 12% 8%, rgba(245,166,35,0.10), transparent 45%),
+      var(--paper);
+    color:var(--asphalt);
+    min-height:100vh;
+    position:relative;
+    overflow-x:hidden;
+  }
+
+  /* ---- mock backdrop page, for preview context only ---- */
+  .backdrop{
+    max-width:720px;
+    margin:0 auto;
+    padding:56px 24px 120px;
+  }
+  .eyebrow{
+    font-family:'Big Shoulders Display',sans-serif;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    font-size:13px;
+    color:var(--amber-dark);
+    font-weight:800;
+    margin-bottom:10px;
+  }
+  h1{
+    font-family:'Big Shoulders Display',sans-serif;
+    font-weight:800;
+    font-size:clamp(34px,7vw,56px);
+    line-height:0.98;
+    margin:0 0 14px;
+    color:var(--asphalt);
+  }
+  .sub{
+    color:var(--steel);
+    font-size:16px;
+    line-height:1.6;
+    max-width:46ch;
+    margin-bottom:28px;
+  }
+  .plate{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    border:2px solid var(--asphalt);
+    border-radius:8px;
+    padding:8px 14px;
+    font-family:'Big Shoulders Display',sans-serif;
+    font-weight:800;
+    letter-spacing:.06em;
+    font-size:14px;
+    background:var(--paper-2);
+  }
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--highway-green);}
+  .note{
+    margin-top:40px;
+    border-top:1px dashed var(--line);
+    padding-top:18px;
+    font-size:13px;
+    color:var(--steel);
+    line-height:1.6;
+  }
+
+  /* ---- floating toggle button ---- */
+  .fab{
+    position:fixed;
+    right:22px;
+    bottom:22px;
+    width:60px;
+    height:60px;
+    border-radius:14px;
+    background:var(--asphalt);
+    border:none;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 10px 30px rgba(27,31,36,0.35);
+    z-index:9999;
+    transition:transform .15s ease;
+  }
+  .fab:hover{transform:translateY(-2px);}
+  .fab svg{width:26px;height:26px;}
+  .fab .spark{fill:var(--amber);}
+  .fab .car{stroke:var(--paper);}
+  .fab-badge{
+    position:absolute;
+    top:-4px; right:-4px;
+    width:16px;height:16px;
+    background:var(--amber);
+    border-radius:50%;
+    border:2px solid var(--paper);
+  }
+
+  /* ---- chat panel ---- */
+  .panel{
+    position:fixed;
+    right:22px;
+    bottom:96px;
+    width:360px;
+    max-width:calc(100vw - 32px);
+    height:520px;
+    max-height:calc(100vh - 140px);
+    background:var(--paper);
+    border-radius:var(--radius);
+    border:1px solid var(--line);
+    box-shadow:0 24px 60px rgba(27,31,36,0.28);
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+    z-index:9999;
+    opacity:0;
+    transform:translateY(16px) scale(0.98);
+    pointer-events:none;
+    transition:opacity .18s ease, transform .18s ease;
+  }
+  .panel.open{
+    opacity:1;
+    transform:translateY(0) scale(1);
+    pointer-events:auto;
+  }
+
+  .panel-header{
+    background:var(--asphalt);
+    color:var(--paper);
+    padding:14px 16px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .avatar{
+    width:34px;height:34px;
+    border-radius:9px;
+    background:var(--amber);
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+    font-family:'Big Shoulders Display',sans-serif;
+    font-weight:800;
+    color:var(--asphalt);
+    font-size:16px;
+  }
+  .header-text{flex:1; min-width:0;}
+  .header-text .name{
+    font-family:'Big Shoulders Display',sans-serif;
+    font-weight:800;
+    font-size:16px;
+    letter-spacing:.02em;
+    line-height:1.1;
+  }
+  .header-text .status{
+    font-size:11px;
+    color:var(--paper-2);
+    display:flex;
+    align-items:center;
+    gap:5px;
+    margin-top:2px;
+  }
+  .status .dot{background:var(--amber);}
+  .close-btn{
+    background:transparent;
+    border:none;
+    color:var(--paper);
+    opacity:.7;
+    cursor:pointer;
+    padding:4px;
+    line-height:0;
+  }
+  .close-btn:hover{opacity:1;}
+
+  .messages{
+    flex:1;
+    overflow-y:auto;
+    padding:16px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .msg{
+    max-width:82%;
+    padding:10px 13px;
+    border-radius:13px;
+    font-size:13.5px;
+    line-height:1.5;
+    white-space:pre-wrap;
+  }
+  .msg.bot{
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    align-self:flex-start;
+    border-bottom-left-radius:4px;
+  }
+  .msg.user{
+    background:var(--asphalt);
+    color:var(--paper);
+    align-self:flex-end;
+    border-bottom-right-radius:4px;
+  }
+  .msg.typing{
+    background:var(--paper-2);
+    align-self:flex-start;
+    display:flex;
+    gap:4px;
+    padding:12px 14px;
+  }
+  .typing span{
+    width:6px;height:6px;border-radius:50%;
+    background:var(--steel);
+    animation:blink 1.2s infinite ease-in-out;
+  }
+  .typing span:nth-child(2){animation-delay:.2s;}
+  .typing span:nth-child(3){animation-delay:.4s;}
+  @keyframes blink{0%,80%,100%{opacity:.25;}40%{opacity:1;}}
+
+  .chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    padding:0 16px 12px;
+  }
+  .chip{
+    border:1px solid var(--asphalt);
+    background:transparent;
+    color:var(--asphalt);
+    font-size:12px;
+    font-weight:600;
+    padding:6px 11px;
+    border-radius:999px;
+    cursor:pointer;
+    transition:background .12s ease, color .12s ease;
+  }
+  .chip:hover{background:var(--asphalt); color:var(--paper);}
+
+  .input-row{
+    display:flex;
+    gap:8px;
+    padding:12px;
+    border-top:1px solid var(--line);
+    background:var(--paper);
+  }
+  .input-row input{
+    flex:1;
+    border:1px solid var(--line);
+    background:#fff;
+    border-radius:10px;
+    padding:10px 12px;
+    font-size:13.5px;
+    font-family:'Inter',sans-serif;
+    outline:none;
+  }
+  .input-row input:focus{border-color:var(--amber-dark);}
+  .send-btn{
+    width:40px;height:40px;
+    border-radius:10px;
+    border:none;
+    background:var(--amber);
+    color:var(--asphalt);
+    cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+  }
+  .send-btn:disabled{opacity:.5; cursor:not-allowed;}
+  .send-btn svg{width:17px;height:17px;}
+
+  .lead-toggle{
+    text-align:center;
+    font-size:11.5px;
+    color:var(--steel);
+    padding:0 16px 10px;
+  }
+  .lead-toggle button{
+    background:none;border:none;
+    color:var(--highway-green);
+    font-weight:700;
+    cursor:pointer;
+    text-decoration:underline;
+    font-size:11.5px;
+    padding:0;
+  }
+
+  /* lead form overlay inside panel */
+  .lead-form{
+    position:absolute;
+    inset:0;
+    background:var(--paper);
+    display:flex;
+    flex-direction:column;
+    transform:translateX(100%);
+    transition:transform .2s ease;
+    z-index:2;
+  }
+  .lead-form.open{transform:translateX(0);}
+  .lead-form-header{
+    background:var(--asphalt);
+    color:var(--paper);
+    padding:14px 16px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .lead-form-header .back{
+    background:none;border:none;color:var(--paper);cursor:pointer;
+    display:flex;align-items:center;padding:4px;
+  }
+  .lead-form-header .title{
+    font-family:'Big Shoulders Display',sans-serif;
+    font-weight:800;font-size:15px;
+  }
+  .lead-body{padding:16px; overflow-y:auto; flex:1;}
+  .lead-body p{font-size:13px; color:var(--steel); line-height:1.5; margin:0 0 14px;}
+  .field{margin-bottom:12px;}
+  .field label{
+    display:block;
+    font-size:11.5px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+    color:var(--steel);
+    margin-bottom:5px;
+  }
+  .field input, .field select{
+    width:100%;
+    border:1px solid var(--line);
+    background:#fff;
+    border-radius:9px;
+    padding:9px 11px;
+    font-size:13.5px;
+    font-family:'Inter',sans-serif;
+    outline:none;
+  }
+  .field input:focus, .field select:focus{border-color:var(--amber-dark);}
+  .submit-btn{
+    width:100%;
+    background:var(--highway-green);
+    color:#fff;
+    border:none;
+    padding:11px;
+    border-radius:10px;
+    font-weight:700;
+    font-size:13.5px;
+    cursor:pointer;
+    margin-top:4px;
+  }
+  .submit-btn:hover{filter:brightness(1.06);}
+  .lead-success{
+    padding:24px 16px;
+    text-align:center;
+  }
+  .lead-success .dot{
+    width:44px;height:44px;
+    border-radius:50%;
+    background:var(--highway-green);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    margin:0 auto 12px;
+  }
+</style>
+</head>
+<body>
+
+<div class="backdrop">
+  <div class="eyebrow">Pasalo Cars PH · widget preview</div>
+  <h1>Assume‑balance<br>cars, sorted.</h1>
+  <div class="sub">Ito ang live preview ng site mo — ang widget sa ibaba-right ang AI assistant na gagana katulad ng Smicos, pero customized para sa proseso ng pasalo.</div>
+  <div class="plate"><span class="dot"></span> Silang, Cavite · The Wizard Assume Balance Cars 2.0</div>
+  <div class="note">Tap the amber bubble bottom-right to try the assistant. Try asking: "paano ang assume balance process" or "pwede bang magbenta ng sasakyan ko".</div>
+</div>
+
+<!-- ================= WIDGET (this is the embeddable part) ================= -->
+<button class="fab" id="fab" aria-label="Open chat">
+  <span class="fab-badge"></span>
+  <svg viewBox="0 0 24 24" fill="none">
+    <path class="car" d="M4 16.5V13l1.6-4.2A2 2 0 0 1 7.5 7.5h9a2 2 0 0 1 1.9 1.3L20 13v3.5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle class="spark" cx="7.5" cy="17.5" r="1.6"/>
+    <circle class="spark" cx="16.5" cy="17.5" r="1.6"/>
+    <path class="car" d="M4 13h16" stroke-width="1.6"/>
+  </svg>
+</button>
+
+<div class="panel" id="panel" style="position:fixed; right:22px; bottom:96px;">
+  <div class="panel-header">
+    <div class="avatar">W</div>
+    <div class="header-text">
+      <div class="name">Wizard AI</div>
+      <div class="status"><span class="dot"></span> Pasalo Cars PH assistant</div>
+    </div>
+    <button class="close-btn" id="closeBtn" aria-label="Close chat">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+
+  <div class="messages" id="messages"></div>
+  <div class="chips" id="chips"></div>
+  <div class="lead-toggle">May sasakyan bukod dito? <button id="leadOpenBtn">Mag-iwan ng detalye →</button></div>
+
+  <div class="input-row">
+    <input id="userInput" type="text" placeholder="Type your question..." autocomplete="off">
+    <button class="send-btn" id="sendBtn" aria-label="Send">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 11 18-8-8 18-2-8-8-2Z"/></svg>
+    </button>
+  </div>
+
+  <!-- lead capture overlay -->
+  <div class="lead-form" id="leadForm">
+    <div class="lead-form-header">
+      <button class="back" id="leadBackBtn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+      </button>
+      <div class="title">Iwan ang detalye mo</div>
+    </div>
+    <div class="lead-body" id="leadBody">
+      <p>Kukuha lang kami ng basic info — sasagot ang team sa Viber/FB within the day.</p>
+      <form id="leadFormEl" action="https://formsubmit.co/derlonskie0929@gmail.com" method="POST" target="hidden_iframe">
+        <input type="hidden" name="_subject" value="New inquiry — Wizard AI chat widget">
+        <input type="hidden" name="_captcha" value="false">
+        <div class="field">
+          <label>Pangalan</label>
+          <input name="Name" type="text" required>
+        </div>
+        <div class="field">
+          <label>Contact number (Viber/WhatsApp)</label>
+          <input name="Contact" type="tel" required>
+        </div>
+        <div class="field">
+          <label>Ikaw ba ay...</label>
+          <select name="Type">
+            <option>Buyer — naghahanap ng sasakyan</option>
+            <option>Seller — magpapasalo ng sasakyan ko</option>
+            <option>Iba pa / tanong lang</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Model / budget / detalye</label>
+          <input name="Details" type="text" placeholder="hal. Vios 2019, budget 60k downpayment">
+        </div>
+        <button class="submit-btn" type="submit">Ipadala</button>
+      </form>
+    </div>
+    <iframe name="hidden_iframe" style="display:none;"></iframe>
+  </div>
+</div>
+
+<script>
+const KNOWLEDGE = `You are "Wizard AI", the friendly chat assistant for Pasalo Cars PH (Facebook page: "The Wizard Assume Balance Cars 2.0"), an assume-balance (pasalo) car facilitation business based in Silang, Cavite, Philippines.
+
+WHAT PASALO / ASSUME-BALANCE MEANS: A seller who still has an outstanding car loan transfers the vehicle to a buyer, who takes over ("assumes") the remaining monthly amortization and balance. It involves three parties — buyer, seller, and the lending bank/financing company — and legally requires the lender's approval before the transfer is binding. Buyers often get a cheaper, near-new car and sometimes a better interest rate than starting a new loan; sellers get to exit a loan they can no longer afford. Both sides should insist on proper documentation (deed of sale with assumption of mortgage, official receipt, coordination with the financing company) to avoid repossession or fraud risk.
+
+WHAT THE WEBSITE OFFERS: vehicle listings with detail pages, a loan/amortization calculator, a "compare vehicles" tool, a favorites list, search/filter/sort, and a seller submission form.
+
+CONTACT CHANNELS: Facebook Page "The Wizard Assume Balance Cars 2.0", Viber/WhatsApp +639950369117, email derlonskie0929@gmail.com.
+
+IMPORTANT LIMITS:
+- You do NOT have live access to the actual current vehicle inventory, so never invent specific car models, prices, mileage, or availability. If asked about specific listings, say you don't have real-time inventory access and point them to browse the live site listings or leave their details so the team can follow up with exact matches.
+- You are not a lawyer or the bank — for loan approval specifics, refer them to the lending company or the Pasalo Cars PH team directly.
+- Keep answers short and conversational (2-5 sentences), like a real chat, not an essay.
+- Reply in Taglish (mix of Tagalog and English) matching how the user writes to you — if they write in English, you can lean more English; if Taglish/Tagalog, match that.
+- If the user shows buying or selling intent, warmly suggest they tap "Mag-iwan ng detalye" to leave their contact info so the team can follow up, or contact via Viber directly.
+- Never claim to guarantee loan approval, pricing, or outcomes you can't verify.`;
+
+// EDIT THIS after you deploy your Cloudflare Worker — paste the
+// worker.dev URL Cloudflare gives you (or your custom domain).
+const WORKER_URL = "https://REPLACE-WITH-YOUR-WORKER-URL.workers.dev";
+
+let history = [];
+
+const panel = document.getElementById('panel');
+const fab = document.getElementById('fab');
+const closeBtn = document.getElementById('closeBtn');
+const messagesEl = document.getElementById('messages');
+const chipsEl = document.getElementById('chips');
+const input = document.getElementById('userInput');
+const sendBtn = document.getElementById('sendBtn');
+const leadForm = document.getElementById('leadForm');
+const leadOpenBtn = document.getElementById('leadOpenBtn');
+const leadBackBtn = document.getElementById('leadBackBtn');
+const leadFormEl = document.getElementById('leadFormEl');
+const leadBody = document.getElementById('leadBody');
+
+const STARTER_CHIPS = [
+  "Paano ang assume balance process?",
+  "Pwede bang magbenta ng sasakyan ko?",
+  "Paano mag-contact ng team?"
+];
+
+function addMessage(role, text){
+  const div = document.createElement('div');
+  div.className = 'msg ' + (role === 'user' ? 'user' : 'bot');
+  div.textContent = text;
+  messagesEl.appendChild(div);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+  return div;
+}
+
+function addTyping(){
+  const div = document.createElement('div');
+  div.className = 'msg typing';
+  div.id = 'typingIndicator';
+  div.innerHTML = '<span></span><span></span><span></span>';
+  messagesEl.appendChild(div);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+}
+
+function removeTyping(){
+  const t = document.getElementById('typingIndicator');
+  if(t) t.remove();
+}
+
+function renderChips(){
+  chipsEl.innerHTML = '';
+  STARTER_CHIPS.forEach(text => {
+    const b = document.createElement('button');
+    b.className = 'chip';
+    b.textContent = text;
+    b.onclick = () => { chipsEl.style.display = 'none'; sendMessage(text); };
+    chipsEl.appendChild(b);
+  });
+}
+
+async function sendMessage(text){
+  if(!text.trim()) return;
+  addMessage('user', text);
+  history.push({role:'user', content: text});
+  input.value = '';
+  sendBtn.disabled = true;
+  addTyping();
+
+  try{
+    const response = await fetch(WORKER_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        system: KNOWLEDGE,
+        messages: history
+      })
+    });
+    const data = await response.json();
+    removeTyping();
+    const reply = (data.content || []).filter(b => b.type === 'text').map(b => b.text).join('\n').trim()
+      || "Sorry, medyo nagka-glitch — pwede mo bang ulitin, o mag-Viber na lang sa +639950369117?";
+    addMessage('bot', reply);
+    history.push({role:'assistant', content: reply});
+  }catch(err){
+    removeTyping();
+    addMessage('bot', "Sorry, medyo nagka-problema sa connection. Puwede mo i-try ulit, o mag-Viber/WhatsApp sa +639950369117.");
+  }finally{
+    sendBtn.disabled = false;
+    input.focus();
+  }
+}
+
+fab.addEventListener('click', () => {
+  panel.classList.add('open');
+  if(messagesEl.children.length === 0){
+    addMessage('bot', "Hoy, kumusta! 👋 Ako si Wizard AI, katulong mo dito sa Pasalo Cars PH. Tanong ka lang tungkol sa assume-balance process, o kung paano magbenta/bumili — dito lang ako.");
+    renderChips();
+  }
+});
+closeBtn.addEventListener('click', () => panel.classList.remove('open'));
+
+sendBtn.addEventListener('click', () => sendMessage(input.value));
+input.addEventListener('keydown', (e) => { if(e.key === 'Enter') sendMessage(input.value); });
+
+leadOpenBtn.addEventListener('click', () => leadForm.classList.add('open'));
+leadBackBtn.addEventListener('click', () => leadForm.classList.remove('open'));
+
+leadFormEl.addEventListener('submit', () => {
+  setTimeout(() => {
+    leadBody.innerHTML = `
+      <div class="lead-success">
+        <div class="dot">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>
+        </div>
+        <div style="font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:17px;margin-bottom:6px;">Nareceive na!</div>
+        <div style="font-size:13px;color:var(--steel);line-height:1.5;">Salamat! Babalikan ka ng team sa Viber o FB within the day.</div>
+      </div>`;
+  }, 400);
+});
+</script>
+<!-- ================= END WIDGET ================= -->
+
+</body>
+</html>
