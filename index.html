@@ -2396,12 +2396,25 @@ src="https://www.facebook.com/tr?id=1825550832189607&ev=PageView&noscript=1"
     formData.append('_subject', 'Bagong Buyer Inquiry - Pasalo Cars PH');
     formData.append('_template', 'table');
 
-    try {
-      await fetch('https://formsubmit.co/ajax/derlonskie0929@gmail.com', {
+try {
+
+  await supabaseClient
+    .from('leads')
+    .insert([
+      {
+        fullname: name,
+        mobile: phone,
+        message: `Budget: ${budget || ''} | Unit: ${unit || ''}`,
+        source: 'website',
+        status: 'new'
+      }
+    ]);
+
+  await fetch('https://formsubmit.co/ajax/derlonskie0929@gmail.com', {
         method: 'POST',
         headers: { 'Accept': 'application/json' },
         body: formData
-      });
+  });
     } catch (err) {
       console.error('Email send failed, proceeding with WhatsApp anyway.', err);
     }
