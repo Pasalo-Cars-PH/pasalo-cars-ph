@@ -56,6 +56,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://pasalo-cars-ph.github.io/pasalo-cars-ph/forthing-utour-details.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://pasalo-cars-ph.github.io/pasalo-cars-ph/fortuner-g-details.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -117,6 +122,11 @@
   </url>
   <url>
     <loc>https://pasalo-cars-ph.github.io/pasalo-cars-ph/mg5-core-details.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasalo-cars-ph.github.io/pasalo-cars-ph/montero-glx-2021-details.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
